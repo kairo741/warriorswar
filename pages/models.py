@@ -8,6 +8,7 @@ ESTADOS_CHOICES = [
     ('RJ', 'Rio de Janeiro'),
     ('MT', 'Mato Grosso'),
     ('SC', 'Santa Catarina'),
+    ('AC', 'Acre'),
 ]
 
 
