@@ -14,16 +14,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'js/jquery-3.6.0.slim.min.js' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/popper.min.js' %}">
 </head>
-<body>
-<div class="ms-5 mt-3">
-    <h1>ahahahahah</h1>
+<body class="paper-bg">
+<div class="paper-body page-bg">
+    <div class="teste" style="text-align:center;">
+
+        <h1>ahahahahah</h1>
+    </div>
     <form method="post">
 
         {% csrf_token %}
 
         {{ form.as_p }}
 
-        <button type="submit" class="btn-dark">Salvar</button>
+        <button type="submit" class="old-btn">Salvar</button>
 
     </form>
 </div>
