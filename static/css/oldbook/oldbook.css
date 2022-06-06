@@ -132,6 +132,7 @@ input[type=text] {
 
 input[type=text]:focus {
     outline: none;
+    font-size: 1.15rem;
 }
 
 .old-btn {
@@ -158,6 +159,12 @@ option {
     border-image: url(https://i.postimg.cc/DZYqPDTD/bordernew.png) 50 0 50 0 repeat;
 }
 
+/*.teste {*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    background-image: url("../../img/parchment.png");*/
+/*}*/
+
 /*option{*/
 /*  border-width: 20px 0 20px 0;*/
 /*  border-style:solid;*/
@@ -169,3 +176,24 @@ option {
 /*  width: 100%;*/
 /*  height: 60px;*/
 /*}*/
+
+/*
+ Torn left edge banner
+
+ License: GPL 3.0
+ License URL: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+ Structure:
+ <div class="torn_container torn_left torn_right">
+	<div></div>
+	<div>Torn Edge Banner</div>
+ </div>
+*/
+
+.page-maker{
+    height: 20px;
+    width: 10px;
+
+    background-color: red;
+
+}
