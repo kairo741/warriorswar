@@ -22,11 +22,25 @@
     </div>
     <form method="post">
 
-        {% csrf_token %}
+{#        {% if request.user.is_authenticated %}#}
 
-        {{ form.as_p }}
+            {% csrf_token %}
 
-        <button type="submit" class="old-btn">Salvar</button>
+            {{ form.as_p }}
+
+            <button type="submit" class="old-btn">Salvar</button>
+
+{#        {% else %}#}
+{#            <h1>Você não tem acesso!!</h1>#}
+{##}
+{#            <h1>#}
+{#                <a class="nav-link" href="{% url 'login' %}">#}
+{#                    Entrar#}
+{#                </a>#}
+{#            </h1>#}
+{##}
+{#        {% endif %}#}
+
 
     </form>
 </div>

@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Cidade, Pessoa
+from braces.views import GroupRequiredMixin
 
 
 # Create your views here.
@@ -11,7 +12,8 @@ class Index(TemplateView):
     template_name = 'pages/index.html'
 
 
-class CidadeCreate(CreateView):
+class CidadeCreate(GroupRequiredMixin, CreateView):
+    group_required = u'Administrador'
     model = Cidade
     fields = ['nome', 'estado']
     template_name = 'register/form.html'
