@@ -9900,8 +9900,8 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #c2b23e;
-  background-image: linear-gradient(180deg, #c2b23e 10%, #93851d 100%);
+  background-color: #805198;
+  background-image: linear-gradient(180deg, #805198 10%, #721d98 100%);
   background-size: cover;
 }
 
@@ -10861,8 +10861,8 @@ a:focus {
 }
 
 .bg-login-image {
-  /*background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");*/
-  background: url("https://i.pinimg.com/originals/45/2d/2a/452d2a5c7ef51210d40050d8990c89a4.png");
+  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  /*background: url("https://i.pinimg.com/originals/c2/9a/14/c29a141cb09fc2f0c95298681d7d964a.png");*/
   background-position: center;
   background-size: cover;
 }
