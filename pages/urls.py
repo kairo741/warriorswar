@@ -1,6 +1,8 @@
 from django.urls import path
+
+from users.views import UserCreate
 from .views import Index
-from .views import CidadeCreate, PessoaCreate, UserCreate
+from .views import CidadeCreate, PessoaCreate
 from .views import CidadeUpdate, PessoaUpdate
 
 urlpatterns = [
