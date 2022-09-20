@@ -38,12 +38,10 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Criar uma conta!</h1>
                         </div>
-                        <form class="user" method="post">
-                            <div id="form-crispy">
-                                {% csrf_token %}
-                                <!-- Gera o formulário -->
-                                {% crispy form %}
-                            </div>
+                        <form class="user" method="post" action="{% url 'index' %}">
+                            {% csrf_token %}
+                            <!-- Gera o formulário -->
+                            {% crispy form %}
 
                             {#                            <div class="form-group row">#}
                             {#                                <div class="col-sm-6 mb-3 mb-sm-0">#}
@@ -69,9 +67,9 @@
                             {#                                           id="exampleRepeatPassword" placeholder="Repeat Password">#}
                             {#                                </div>#}
                             {#                            </div>#}
-                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Cadastrar
-                            </button>
+{#                            <input type="submit" class="btn btn-primary btn-user btn-block" value="Register">#}
+{#                                Cadastrar#}
+{#                            </input>#}
                             <hr>
                             <a href="index.html" class="btn btn-google btn-user btn-block">
                                 <i class="fab fa-google fa-fw"></i> Register with Google
