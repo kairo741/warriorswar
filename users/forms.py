@@ -37,7 +37,9 @@ class UserForm(UserCreationForm):
             ButtonHolder(
                 Div(
                     HTML("""
-                            <input type="submit" class="btn btn-primary btn-user btn-block" value="Cadastrar">
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                            Cadastrar
+                            </button>
                         """),
                 ))
 

@@ -10,14 +10,14 @@ from django.contrib.auth.models import User
 
 
 class Index(TemplateView):
-    template_name = 'pages/index.html'
+    template_name = 'pages/index/index-content.html'
 
 
 class CidadeCreate(GroupRequiredMixin, CreateView):
     group_required = u'Administrador'
     model = Cidade
     fields = ['nome', 'estado']
-    template_name = 'register/form.html'
+    template_name = 'pages/register/register-element.html'
     success_url = reverse_lazy('index')
 
 
