@@ -1,0 +1,20 @@
+{% extends "pages/index/index-base.html" %}
+{% load static %}
+{% load auth_extras %}
+
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="p-5 form-with-image">
+            <form method="post" id="form-crispy">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary btn-user btn-block">Salvar</button>
+            </form>
+            <img src="" alt="a warrior gif" id="form-warrior-gif">
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}
