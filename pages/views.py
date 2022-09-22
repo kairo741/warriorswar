@@ -97,7 +97,7 @@ class EquipmentList(ListView):
 
 class EquipmentDelete(DeleteView):
     model = Equipment
-    success_url = reverse_lazy('pages/list/equipment-list.html')
+    success_url = reverse_lazy('list-equipment')
 
 
 # ----------------- SPELL -----------------

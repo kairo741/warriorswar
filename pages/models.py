@@ -67,13 +67,13 @@ class Equipment(models.Model):
     #     ("#000000", "black"),
     # ]
 
-    RARITY_CHOICES = [
+    RARITY_CHOICES = (
         ('B', 'Tier B'),
         ('A', 'Tier A'),
         ('S', 'Tier S'),
         ('SS', 'Tier SS'),
         ('SSS', 'Tier SS+')
-    ]
+    )
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=50)
     rarity = models.CharField(max_length=3, choices=RARITY_CHOICES, default=RARITY_CHOICES[2])
