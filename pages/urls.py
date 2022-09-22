@@ -1,8 +1,8 @@
 from django.urls import path
 
 from users.views import UserCreate
-from .views import ElementDelete, EquipmentDelete, EffectDelete
-from .views import ElementList, EquipmentList, EffectList
+from .views import ElementDelete, EquipmentDelete, EffectDelete, SpellDelete
+from .views import ElementList, EquipmentList, EffectList, SpellList
 from .views import Index
 from .views import SpriteCreate, ElementCreate, EquipmentCreate, SpellCreate, EffectCreate
 from .views import SpriteUpdate, ElementUpdate, EquipmentUpdate, SpellUpdate, EffectUpdate
@@ -27,6 +27,8 @@ urlpatterns = [
     # ----------------- SPELL -----------------
     path('register/spell', SpellCreate.as_view(), name='register-spell'),
     path('edit/spell/<int:pk>', SpellUpdate.as_view(), name='edit-spell'),
+    path('list/spell', SpellList.as_view(), name='list-spell'),
+    path('delete/spell/<int:pk>', SpellDelete.as_view(), name='delete-spell'),
     # ----------------- EFFECT -----------------
     path('register/effect', EffectCreate.as_view(), name='register-effect'),
     path('edit/effect/<int:pk>', EffectUpdate.as_view(), name='edit-effect'),

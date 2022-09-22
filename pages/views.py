@@ -101,12 +101,12 @@ class EquipmentDelete(DeleteView):
 
 
 # ----------------- SPELL -----------------
-class SpellCreate(GroupRequiredMixin, CreateView):
-    group_required = adm_group
+class SpellCreate(CreateView):
+    # group_required = adm_group
     model = Spell
     fields = ['name', 'mana_cost']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-spell')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -115,18 +115,28 @@ class SpellCreate(GroupRequiredMixin, CreateView):
         return url
 
 
-class SpellUpdate(GroupRequiredMixin, UpdateView):
-    group_required = adm_group
+class SpellUpdate(UpdateView):
+    # group_required = adm_group
     model = Spell
     fields = ['name', 'mana_cost']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-spell')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         url = super().form_valid(form)
         self.object.save()
         return url
+
+
+class SpellList(ListView):
+    model = Spell
+    template_name = 'pages/list/spell-list.html'
+
+
+class SpellDelete(DeleteView):
+    model = Spell
+    success_url = reverse_lazy('list-spell')
 
 
 # ----------------- EFFECT -----------------

@@ -74,6 +74,9 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Guerreiros:</h6>
                     <a class="collapse-item" href="{% url 'register-sprite' %}">Cadastrar</a>
+                    <a class="collapse-item" href="{% url 'list-spell' %}">Visualizar todos</a>
+                    <h6 class="collapse-header">Feitiços:</h6>
+                    <a class="collapse-item" href="{% url 'register-spell' %}">Cadastrar</a>
                     <a class="collapse-item" href="cards.html">Visualizar todos</a>
                     {% if request.user|has_group:'Administrador' %}
                         <h6 class="collapse-header">Sprites:</h6>
@@ -82,9 +85,6 @@
                         <h6 class="collapse-header">Equipamentos:</h6>
                         <a class="collapse-item" href="{% url 'register-equipment' %}">Cadastrar</a>
                         <a class="collapse-item" href="{% url 'list-equipment' %}">Visualizar todos</a>
-                        <h6 class="collapse-header">Feitiços:</h6>
-                        <a class="collapse-item" href="{% url 'register-spell' %}">Cadastrar</a>
-                        <a class="collapse-item" href="cards.html">Visualizar todos</a>
                         <h6 class="collapse-header">Elementos:</h6>
                         <a class="collapse-item" href="{% url 'register-element' %}">Cadastrar</a>
                         <a class="collapse-item" href="{% url 'list-element' %}">Visualizar todos</a>
@@ -808,7 +808,7 @@
         if (inputElement !== undefined) {
             inputElement.classList.value = 'form-control form-control-user';
         }
-        if(inputElement.name === 'color'){
+        if (inputElement.name === 'color') {
             inputElement.type = 'color';
         }
     }

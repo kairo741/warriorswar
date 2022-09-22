@@ -5,31 +5,24 @@
 
 {% block content %}
     <!-- Begin Page Content -->
-    <a class="btn btn-primary btn-lg float-register-button" type="button"
-       href="{% url 'register-equipment' %}">
-        Cadastrar
-    </a>
     <table class="table table-striped text-center">
+        <a class="btn btn-primary btn-lg float-register-button" type="button"
+           href="{% url 'register-spell' %}">
+            Cadastrar
+        </a>
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Tipo</th>
-            <th>Raridade</th>
-            <th>Cor</th>
+            <th>Criado por</th>
             <th>Ações</th>
         </tr>
-        {% for equipment in object_list %}
+        {% for spell in object_list %}
             <tr>
-                <td>{{ equipment.pk }}</td>
-                <td>{{ equipment.name }}</td>
-                <td>{{ equipment.type }}</td>
-                <td>{{ equipment.get_rarity_display }}</td>
-                <td class="color-field-list">
-                    <div style="background-color: {{ equipment.color }};"></div>
-                    {{ equipment.color }}
-                </td>
+                <td>{{ spell.pk }}</td>
+                <td>{{ spell.name }}</td>
+                <td>{{ spell.user }}</td>
                 <td>
-                    <a href="{% url 'edit-equipment' equipment.pk %}" class="btn btn-primary btn-sm"><i
+                    <a href="{% url 'edit-spell' spell.pk %}" class="btn btn-primary btn-sm"><i
                             class="fas fa-edit fa-sm fa-fw text-gray-400"></i></a>
                     <a class="btn btn-danger btn-sm" href="" data-toggle="modal"
                        data-target="#deleteModal">
@@ -37,7 +30,7 @@
                     </a>
                 </td>
             </tr>
-            <!-- Delete Modal-->
+            <!-- Logout Modal-->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="firstModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -48,11 +41,11 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div class="modal-body">Se realmente deseja excluir o registro "{{ equipment }}", selecione
+                        <div class="modal-body">Se realmente deseja excluir o registro "{{ spell }}", selecione
                             "Excluir"
                             abaixo <strong>(essa ação é irreversível)</strong>.
                         </div>
-                        <form action="{% url 'delete-equipment' pk=equipment.pk %}" method="POST">
+                        <form action="{% url 'delete-spell' pk=spell.pk %}" method="POST">
                             {% csrf_token %}
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -64,7 +57,7 @@
             </div>
         {% empty %}
             <tr>
-                <td colspan="6">Nenhum equipamento cadastrado!</td>
+                <td colspan="3">Nenhum Feitiço cadastrado!</td>
             </tr>
         {% endfor %}
     </table>
