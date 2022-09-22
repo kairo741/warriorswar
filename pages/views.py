@@ -22,7 +22,7 @@ class SpriteCreate(GroupRequiredMixin, CreateView):
     model = Sprite
     fields = ['name', 'base64', 'type']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-sprite')
 
     def form_valid(self, form):
         # Define o usuário como usuário logado
@@ -37,13 +37,23 @@ class SpriteUpdate(GroupRequiredMixin, UpdateView):
     model = Sprite
     fields = ['name', 'base64', 'type']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-sprite')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         url = super().form_valid(form)
         self.object.save()
         return url
+
+
+class SpriteList(ListView):
+    model = Sprite
+    template_name = 'pages/list/sprite-list.html'
+
+
+class SpriteDelete(DeleteView):
+    model = Sprite
+    success_url = reverse_lazy('list-sprite')
 
 
 # ----------------- ELEMENT -----------------
@@ -70,7 +80,7 @@ class ElementList(ListView):
 
 class ElementDelete(DeleteView):
     model = Element
-    success_url = reverse_lazy('pages/list/element-list.html')
+    success_url = reverse_lazy('list-element')
 
 
 # ----------------- EQUIPMENT -----------------
