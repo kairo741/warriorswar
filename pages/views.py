@@ -1,9 +1,12 @@
 from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.shortcuts import render
+from django.template import RequestContext
 
 from .models import Sprite, Element, Equipment, Spell, Effect, Warrior
 
@@ -44,6 +47,10 @@ class WarriorUpdate(GroupRequiredMixin, UpdateView):
         url = super().form_valid(form)
         self.object.save()
         return url
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Warrior, pk=self.kwargs['pk'], user=self.request.user)
+        return self.object
 
 
 class WarriorList(ListView):
@@ -222,6 +229,10 @@ class UserCreate(CreateView):
     template_name = 'register/register_account.html'
     success_url = reverse_lazy('index')
 
+
+# ----------------- HANDLERS -----------------
+def handler404(request, exception):
+    return render(request, 'pages/error-handler/404.html', {})
 # class PessoaCreate(CreateView, UpdateView):
 #     model = Pessoa
 #     fields = ['nome_completo', 'idade', 'email', 'cidade']
