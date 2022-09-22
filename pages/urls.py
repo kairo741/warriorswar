@@ -1,11 +1,11 @@
 from django.urls import path
 
 from users.views import UserCreate
+from .views import ElementDelete, EquipmentDelete, EffectDelete
+from .views import ElementList, EquipmentList, EffectList
 from .views import Index
-from .views import SpriteCreate, ElementCreate, EquipmentCreate, SpellCreate
-from .views import SpriteUpdate, ElementUpdate, EquipmentUpdate, SpellUpdate
-from .views import ElementDelete, EquipmentDelete
-from .views import ElementList, EquipmentList
+from .views import SpriteCreate, ElementCreate, EquipmentCreate, SpellCreate, EffectCreate
+from .views import SpriteUpdate, ElementUpdate, EquipmentUpdate, SpellUpdate, EffectUpdate
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -28,7 +28,8 @@ urlpatterns = [
     path('register/spell', SpellCreate.as_view(), name='register-spell'),
     path('edit/spell/<int:pk>', SpellUpdate.as_view(), name='edit-spell'),
     # ----------------- EFFECT -----------------
-    path('register/effect', SpellCreate.as_view(), name='register-effect'),
-    path('edit/effect/<int:pk>', SpellUpdate.as_view(), name='edit-effect'),
-
+    path('register/effect', EffectCreate.as_view(), name='register-effect'),
+    path('edit/effect/<int:pk>', EffectUpdate.as_view(), name='edit-effect'),
+    path('list/effect', EffectList.as_view(), name='list-effect'),
+    path('delete/effect/<int:pk>', EffectDelete.as_view(), name='delete-effect'),
 ]

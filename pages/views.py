@@ -135,7 +135,7 @@ class EffectCreate(GroupRequiredMixin, CreateView):
     model = Effect
     fields = ['name']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-effect')
 
 
 class EffectUpdate(GroupRequiredMixin, UpdateView):
@@ -143,7 +143,17 @@ class EffectUpdate(GroupRequiredMixin, UpdateView):
     model = Effect
     fields = ['name']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-effect')
+
+
+class EffectList(ListView):
+    model = Effect
+    template_name = 'pages/list/effect-list.html'
+
+
+class EffectDelete(DeleteView):
+    model = Effect
+    success_url = reverse_lazy('list-effect')
 
 
 class UserCreate(CreateView):
