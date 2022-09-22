@@ -2,7 +2,8 @@ from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 
 from .models import Sprite, Element, Equipment, Spell, Effect
 
@@ -51,7 +52,7 @@ class ElementCreate(GroupRequiredMixin, CreateView):
     model = Element
     fields = ['name']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-element')
 
 
 class ElementUpdate(GroupRequiredMixin, UpdateView):
@@ -59,24 +60,44 @@ class ElementUpdate(GroupRequiredMixin, UpdateView):
     model = Element
     fields = ['name']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-element')
+
+
+class ElementList(ListView):
+    model = Element
+    template_name = 'pages/list/element-list.html'
+
+
+class ElementDelete(DeleteView):
+    model = Element
+    success_url = reverse_lazy('pages/list/element-list.html')
 
 
 # ----------------- EQUIPMENT -----------------
 class EquipmentCreate(GroupRequiredMixin, CreateView):
     group_required = adm_group
     model = Equipment
-    fields = ['name', 'type', 'color']
+    fields = ['name', 'type', 'rarity', 'color']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-equipment')
 
 
 class EquipmentUpdate(GroupRequiredMixin, UpdateView):
     group_required = adm_group
     model = Equipment
-    fields = ['name', 'type', 'color']
+    fields = ['name', 'type', 'rarity', 'color']
     template_name = 'pages/register/base-register.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list-equipment')
+
+
+class EquipmentList(ListView):
+    model = Equipment
+    template_name = 'pages/list/equipment-list.html'
+
+
+class EquipmentDelete(DeleteView):
+    model = Equipment
+    success_url = reverse_lazy('pages/list/equipment-list.html')
 
 
 # ----------------- SPELL -----------------

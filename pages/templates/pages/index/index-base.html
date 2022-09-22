@@ -87,7 +87,7 @@
                         <a class="collapse-item" href="cards.html">Visualizar todos</a>
                         <h6 class="collapse-header">Elementos:</h6>
                         <a class="collapse-item" href="{% url 'register-element' %}">Cadastrar</a>
-                        <a class="collapse-item" href="cards.html">Visualizar todos</a>
+                        <a class="collapse-item" href="{% url 'list-element' %}">Visualizar todos</a>
                         <h6 class="collapse-header">Efeitos:</h6>
                         <a class="collapse-item" href="{% url 'register-effect' %}">Cadastrar</a>
                         <a class="collapse-item" href="cards.html">Visualizar todos</a>
@@ -171,8 +171,7 @@
             <img class="sidebar-card-illustration mb-2" src="{% static 'img/cash2.svg' %}" alt="...">
             <p class="text-center mb-2"><strong>𝒲𝒶𝓇𝓇𝒾ℴ𝓇𝓈𝒲𝒶𝓇 PRO</strong> o ajudará a ganhar muito mais itens e magias
             </p>
-            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Utilize o plano
-                Pro</a>
+            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Tornar-se PRO</a>
         </div>
 
     </ul>
@@ -805,9 +804,12 @@
 <script type="application/javascript">
 
     let inputs = document.getElementById('form-crispy').getElementsByTagName('input')
-    for (const aElement of inputs) {
-        if (aElement !== undefined) {
-            aElement.classList.value = 'form-control form-control-user'
+    for (const inputElement of inputs) {
+        if (inputElement !== undefined) {
+            inputElement.classList.value = 'form-control form-control-user';
+        }
+        if(inputElement.name === 'color'){
+            inputElement.type = 'color';
         }
     }
 

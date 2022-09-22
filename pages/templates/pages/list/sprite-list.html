@@ -1,0 +1,60 @@
+{% extends "pages/index/index-base.html" %}
+{% load static %}
+{% load auth_extras %}
+
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <table class="table table-striped text-center">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+        {% for element in object_list %}
+            <tr>
+                <td>{{ element.pk }}</td>
+                <td>{{ element.name }}</td>
+                <td>
+                    <a href="{% url 'edit-element' element.pk %}" class="btn btn-primary btn-sm"
+                       style="background-color: #805198 !important; border-color: #805198 !important;"><i
+                            class="fas fa-edit fa-sm fa-fw text-gray-400"></i></a>
+                    <a class="btn btn-danger btn-sm" href="" data-toggle="modal"
+                       data-target="#deleteModal">
+                        <i class="fas fa-trash fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                </td>
+            </tr>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="firstModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Tem certeza?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Se realmente deseja excluir o registro "{{ element }}", selecione
+                            "Excluir"
+                            abaixo <strong>(essa ação é irreversível)</strong>.
+                        </div>
+                        <form action="{% url 'delete-element' pk=element.pk %}" method="POST">
+                            {% csrf_token %}
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                <button class="btn btn-danger" type="submit">Excluir</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <tr>
+                <td colspan="3">Nenhum elemento cadastrado!</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <!-- /.container-fluid -->
+{% endblock %}

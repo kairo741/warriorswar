@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from colorfield.fields import ColorField
 
 # Create your models here.
 
@@ -61,9 +62,23 @@ class Effect(models.Model):
 
 
 class Equipment(models.Model):
+    # COLOR_PALETTE = [
+    #     ("#FFFFFF", "white"),
+    #     ("#000000", "black"),
+    # ]
+
+    RARITY_CHOICES = [
+        ('B', 'Tier B'),
+        ('A', 'Tier A'),
+        ('S', 'Tier S'),
+        ('SS', 'Tier SS'),
+        ('SSS', 'Tier SS+')
+    ]
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=50)
-    color = models.CharField(max_length=50)
+    rarity = models.CharField(max_length=3, choices=RARITY_CHOICES, default=RARITY_CHOICES[2])
+    color = ColorField(default='#FF0000')
+    # color = ColorField(default='#FF0000', samples=COLOR_PALETTE)
 
     active = models.BooleanField(default=True)
 
