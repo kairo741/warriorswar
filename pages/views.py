@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
-from .models import Cidade, Pessoa
+from .models import Cidade, Pessoa, Sprite
 from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 
@@ -13,12 +13,19 @@ class Index(TemplateView):
     template_name = 'pages/index/index-content.html'
 
 
-class CidadeCreate(GroupRequiredMixin, CreateView):
+class SpriteCreate(GroupRequiredMixin, CreateView):
     group_required = u'Administrador'
-    model = Cidade
-    fields = ['nome', 'estado']
+    model = Sprite
+    fields = ['name', 'base64', 'type']
     template_name = 'pages/register/register-element.html'
     success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        # Define o usuário como usuário logado
+        form.instance.user = self.request.user
+        url = super().form_valid(form)
+        self.object.save()
+        return url
 
 
 class PessoaCreate(CreateView, UpdateView):

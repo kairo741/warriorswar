@@ -5,9 +5,17 @@
 {% block content %}
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        <form method="post" id="form-crispy">
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary btn-user btn-block">Salvar</button>
+
+
+        </form>
 
     </div>
     <!-- /.container-fluid -->
