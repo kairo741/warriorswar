@@ -9,7 +9,8 @@ from .models import Sprite, Element, Equipment, Spell, Effect, Warrior
 
 # Create your views here.
 
-adm_group = u'Administrador'
+adm_group = u'admins'
+normal_user_group = u'summoners'
 
 
 class Index(TemplateView):
@@ -17,7 +18,8 @@ class Index(TemplateView):
 
 
 # ----------------- WARRIOR -----------------
-class WarriorCreate(CreateView):
+class WarriorCreate(GroupRequiredMixin, CreateView):
+    group_required = normal_user_group
     model = Warrior
     fields = ['name']
     template_name = 'pages/register/base-register.html'
@@ -30,7 +32,8 @@ class WarriorCreate(CreateView):
         return url
 
 
-class WarriorUpdate(UpdateView):
+class WarriorUpdate(GroupRequiredMixin, UpdateView):
+    group_required = normal_user_group
     model = Warrior
     fields = ['name']
     template_name = 'pages/register/base-register.html'
@@ -148,8 +151,8 @@ class EquipmentDelete(DeleteView):
 
 
 # ----------------- SPELL -----------------
-class SpellCreate(CreateView):
-    # group_required = adm_group
+class SpellCreate(GroupRequiredMixin, CreateView):
+    group_required = normal_user_group
     model = Spell
     fields = ['name', 'mana_cost']
     template_name = 'pages/register/base-register.html'
@@ -162,8 +165,8 @@ class SpellCreate(CreateView):
         return url
 
 
-class SpellUpdate(UpdateView):
-    # group_required = adm_group
+class SpellUpdate(GroupRequiredMixin, UpdateView):
+    group_required = normal_user_group
     model = Spell
     fields = ['name', 'mana_cost']
     template_name = 'pages/register/base-register.html'

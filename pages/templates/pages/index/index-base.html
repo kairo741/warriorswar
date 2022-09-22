@@ -78,7 +78,7 @@
                     <h6 class="collapse-header">Feitiços:</h6>
                     <a class="collapse-item" href="{% url 'register-spell' %}">Cadastrar</a>
                     <a class="collapse-item" href="{% url 'list-spell' %}">Visualizar todos</a>
-                    {% if request.user|has_group:'Administrador' %}
+                    {% if request.user|has_group:'admins' %}
                         <h6 class="collapse-header">Sprites:</h6>
                         <a class="collapse-item" href="{% url 'register-sprite' %}">Cadastrar</a>
                         <a class="collapse-item" href="{% url 'list-sprite' %}">Visualizar todos</a>
