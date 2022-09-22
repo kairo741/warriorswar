@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
-from .models import Sprite, Element, Equipment, Spell, Effect
+from .models import Sprite, Element, Equipment, Spell, Effect, Warrior
 
 # Create your views here.
 
@@ -14,6 +14,43 @@ adm_group = u'Administrador'
 
 class Index(TemplateView):
     template_name = 'pages/index/index-content.html'
+
+
+# ----------------- WARRIOR -----------------
+class WarriorCreate(CreateView):
+    model = Warrior
+    fields = ['name']
+    template_name = 'pages/register/base-register.html'
+    success_url = reverse_lazy('list-warrior')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        url = super().form_valid(form)
+        self.object.save()
+        return url
+
+
+class WarriorUpdate(UpdateView):
+    model = Warrior
+    fields = ['name']
+    template_name = 'pages/register/base-register.html'
+    success_url = reverse_lazy('list-warrior')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        url = super().form_valid(form)
+        self.object.save()
+        return url
+
+
+class WarriorList(ListView):
+    model = Warrior
+    template_name = 'pages/list/warrior-list.html'
+
+
+class WarriorDelete(DeleteView):
+    model = Warrior
+    success_url = reverse_lazy('list-warrior')
 
 
 # ----------------- SPRITE -----------------

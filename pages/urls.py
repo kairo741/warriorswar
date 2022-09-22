@@ -1,16 +1,21 @@
 from django.urls import path
 
 from users.views import UserCreate
-from .views import ElementDelete, EquipmentDelete, EffectDelete, SpellDelete, SpriteDelete
-from .views import ElementList, EquipmentList, EffectList, SpellList, SpriteList
+from .views import ElementDelete, EquipmentDelete, EffectDelete, SpellDelete, SpriteDelete, WarriorDelete
+from .views import ElementList, EquipmentList, EffectList, SpellList, SpriteList, WarriorList
 from .views import Index
-from .views import SpriteCreate, ElementCreate, EquipmentCreate, SpellCreate, EffectCreate
-from .views import SpriteUpdate, ElementUpdate, EquipmentUpdate, SpellUpdate, EffectUpdate
+from .views import SpriteCreate, ElementCreate, EquipmentCreate, SpellCreate, EffectCreate, WarriorCreate
+from .views import SpriteUpdate, ElementUpdate, EquipmentUpdate, SpellUpdate, EffectUpdate, WarriorUpdate
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     # ----------------- USER -----------------
     path('register/user', UserCreate.as_view(), name='register-user'),
+    # ----------------- WARRIOR -----------------
+    path('register/warrior', WarriorCreate.as_view(), name='register-warrior'),
+    path('edit/warrior/<int:pk>', WarriorUpdate.as_view(), name='edit-warrior'),
+    path('list/warrior', WarriorList.as_view(), name='list-warrior'),
+    path('delete/warrior/<int:pk>', WarriorDelete.as_view(), name='delete-warrior'),
     # ----------------- SPRITE -----------------
     path('register/sprite', SpriteCreate.as_view(), name='register-sprite'),
     path('edit/sprite/<int:pk>', SpriteUpdate.as_view(), name='edit-sprite'),
