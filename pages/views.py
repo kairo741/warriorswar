@@ -1,14 +1,14 @@
 from braces.views import GroupRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from django.shortcuts import render
-from django.template import RequestContext
 
 from .models import Sprite, Element, Equipment, Spell, Effect, Warrior
+from .templatetags.auth_extras import has_group
 
 # Create your views here.
 
@@ -53,14 +53,26 @@ class WarriorUpdate(GroupRequiredMixin, UpdateView):
         return self.object
 
 
-class WarriorList(ListView):
+class WarriorList(GroupRequiredMixin, ListView):
+    group_required = normal_user_group
     model = Warrior
     template_name = 'pages/list/warrior-list.html'
+
+    def get_queryset(self):
+        if not has_group(self.request.user, adm_group):
+            self.object_list = Warrior.objects.filter(user=self.request.user)
+            return self.object_list
+        else:
+            return Warrior.objects.all()
 
 
 class WarriorDelete(DeleteView):
     model = Warrior
     success_url = reverse_lazy('list-warrior')
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Warrior, pk=self.kwargs['pk'], user=self.request.user)
+        return self.object
 
 
 # ----------------- SPRITE -----------------
@@ -185,15 +197,31 @@ class SpellUpdate(GroupRequiredMixin, UpdateView):
         self.object.save()
         return url
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Spell, pk=self.kwargs['pk'], user=self.request.user)
+        return self.object
 
-class SpellList(ListView):
+
+class SpellList(GroupRequiredMixin, ListView):
+    group_required = normal_user_group
     model = Spell
     template_name = 'pages/list/spell-list.html'
+
+    def get_queryset(self):
+        if not has_group(self.request.user, adm_group):
+            self.object_list = Spell.objects.filter(user=self.request.user)
+            return self.object_list
+        else:
+            return Warrior.objects.all()
 
 
 class SpellDelete(DeleteView):
     model = Spell
     success_url = reverse_lazy('list-spell')
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Spell, pk=self.kwargs['pk'], user=self.request.user)
+        return self.object
 
 
 # ----------------- EFFECT -----------------
