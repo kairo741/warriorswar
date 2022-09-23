@@ -38,7 +38,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Criar uma conta!</h1>
                         </div>
-                        <form class="user" method="post" action="{% url 'index' %}">
+                        <form class="user" method="POST">
                             {% csrf_token %}
                             <!-- Gera o formulário -->
                             {% crispy form %}

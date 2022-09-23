@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.contrib.auth.models import Group
 from users.forms import UserForm
 
 
@@ -11,5 +10,8 @@ class UserCreate(CreateView):
     success_url = reverse_lazy('index')
 
     def form_valid(self, form):
-        super().form_valid(form)
-        return redirect(reverse('index'))
+        url = super().form_valid(form)
+        user_group = Group.objects.get_or_create(name="summoners")
+        self.object.groups.add(user_group[0])
+        self.object.save()
+        return url

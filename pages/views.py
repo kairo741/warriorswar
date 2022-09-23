@@ -264,11 +264,11 @@ class EffectDelete(DeleteView):
     success_url = reverse_lazy('list-effect')
 
 
-class UserCreate(CreateView):
-    model = User
-    fields = ["first_name", "last_name", "email", "password"]
-    template_name = 'register/register_account.html'
-    success_url = reverse_lazy('index')
+# class UserCreate(CreateView):
+#     model = User
+#     fields = ["first_name", "last_name", "email", "password"]
+#     template_name = 'register/register_account.html'
+#     success_url = reverse_lazy('index')
 
 
 # ----------------- HANDLERS -----------------
