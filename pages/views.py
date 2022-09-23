@@ -19,6 +19,19 @@ normal_user_group = u'summoners'
 class Index(TemplateView):
     template_name = 'pages/index/index-content.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        user = context['view'].request.user
+        all_warriors = Warrior.objects.all().count()
+        context['all_warriors'] = all_warriors
+        context['all_users'] = User.objects.all().count()
+        if user.is_authenticated:
+            user_warriors = Warrior.objects.filter(user=user).count()
+            context['user_warriors'] = user_warriors
+            context['percent_warriors'] = f'{(user_warriors / all_warriors) * 100:.2f}'
+
+        return context
+
 
 # ----------------- WARRIOR -----------------
 class WarriorCreate(GroupRequiredMixin, CreateView):
