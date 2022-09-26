@@ -800,33 +800,9 @@
 <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
 <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 
+{% block scripts %}
 
-<script type="application/javascript">
-
-    let inputs = document.getElementById('form-crispy').getElementsByTagName('input')
-    for (const inputElement of inputs) {
-        if (inputElement !== undefined) {
-            inputElement.classList.value = 'form-control form-control-user';
-        }
-        if (inputElement.name === 'color') {
-            inputElement.type = 'color';
-        }
-    }
-
-    let imgTag = document.getElementById('form-warrior-gif');
-    if (imgTag !== null && imgTag !== undefined) {
-        let images = ["https://64.media.tumblr.com/3df213299f49d6a73743095f18209e38/tumblr_inline_p8447v6QGG1r2gwmq_400.gifv",
-            "https://i.imgur.com/yUV7gfy.gif",
-            "https://static.wikia.nocookie.net/habitrpg/images/5/5b/Quest_windup.gif/revision/latest/top-crop/width/350/height/350?cb=20200825225041",
-            "https://media.indiedb.com/images/articles/1/175/174859/auto/sorcerer.gif"
-        ];
-
-        const random = Math.floor(Math.random() * images.length);
-        imgTag.src = images[random];
-    }
-
-
-</script>
+{% endblock %}
 
 </body>
 
