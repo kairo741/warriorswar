@@ -130,10 +130,7 @@ class SpriteList(ListView):
     template_name = 'pages/list/sprite-list.html'
 
     def get_queryset(self):
-        filter_txt = self.request.GET.get("name")
-        if filter_txt:
-            return Element.objects.filter(name__icontains=filter_txt)
-        return Element.objects.all()
+        return queryset_without_user(Sprite, self.request.GET.get("name"))
 
 
 class SpriteDelete(DeleteView):
@@ -163,10 +160,7 @@ class ElementList(ListView):
     template_name = 'pages/list/element-list.html'
 
     def get_queryset(self):
-        filter_txt = self.request.GET.get("name")
-        if filter_txt:
-            return Element.objects.filter(name__icontains=filter_txt)
-        return Element.objects.all()
+        return queryset_without_user(Element, self.request.GET.get("name"))
 
 
 class ElementDelete(DeleteView):
@@ -196,10 +190,7 @@ class EquipmentList(ListView):
     template_name = 'pages/list/equipment-list.html'
 
     def get_queryset(self):
-        filter_txt = self.request.GET.get("name")
-        if filter_txt:
-            return Equipment.objects.filter(name__icontains=filter_txt)
-        return Equipment.objects.all()
+        return queryset_without_user(Equipment, self.request.GET.get("name"))
 
 
 class EquipmentDelete(DeleteView):
@@ -291,10 +282,7 @@ class EffectList(ListView):
     template_name = 'pages/list/effect-list.html'
 
     def get_queryset(self):
-        filter_txt = self.request.GET.get("name")
-        if filter_txt:
-            return Element.objects.filter(name__icontains=filter_txt)
-        return Element.objects.all()
+        return queryset_without_user(Effect, self.request.GET.get("name"))
 
 
 class EffectDelete(DeleteView):
@@ -307,6 +295,12 @@ class EffectDelete(DeleteView):
 #     fields = ["first_name", "last_name", "email", "password"]
 #     template_name = 'register/register_account.html'
 #     success_url = reverse_lazy('index')
+
+
+def queryset_without_user(obj, filter_txt):
+    if filter_txt:
+        return obj.objects.filter(name__icontains=filter_txt)
+    return obj.objects.all()
 
 
 # ----------------- HANDLERS -----------------
