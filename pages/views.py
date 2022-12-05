@@ -72,10 +72,17 @@ class WarriorList(GroupRequiredMixin, ListView):
     template_name = 'pages/list/warrior-list.html'
 
     def get_queryset(self):
+        filter_txt = self.request.GET.get("name")
         if not has_group(self.request.user, adm_group):
-            self.object_list = Warrior.objects.filter(user=self.request.user)
+            if filter_txt:
+                self.object_list = Warrior.objects.filter(name__icontains=filter_txt, user=self.request.user)
+            else:
+                self.object_list = Warrior.objects.filter(user=self.request.user)
+
             return self.object_list
         else:
+            if filter_txt:
+                return Warrior.objects.filter(name__icontains=filter_txt)
             return Warrior.objects.all()
 
 
@@ -122,6 +129,12 @@ class SpriteList(ListView):
     model = Sprite
     template_name = 'pages/list/sprite-list.html'
 
+    def get_queryset(self):
+        filter_txt = self.request.GET.get("name")
+        if filter_txt:
+            return Element.objects.filter(name__icontains=filter_txt)
+        return Element.objects.all()
+
 
 class SpriteDelete(DeleteView):
     model = Sprite
@@ -149,6 +162,12 @@ class ElementList(ListView):
     model = Element
     template_name = 'pages/list/element-list.html'
 
+    def get_queryset(self):
+        filter_txt = self.request.GET.get("name")
+        if filter_txt:
+            return Element.objects.filter(name__icontains=filter_txt)
+        return Element.objects.all()
+
 
 class ElementDelete(DeleteView):
     model = Element
@@ -175,6 +194,12 @@ class EquipmentUpdate(GroupRequiredMixin, UpdateView):
 class EquipmentList(ListView):
     model = Equipment
     template_name = 'pages/list/equipment-list.html'
+
+    def get_queryset(self):
+        filter_txt = self.request.GET.get("name")
+        if filter_txt:
+            return Equipment.objects.filter(name__icontains=filter_txt)
+        return Equipment.objects.all()
 
 
 class EquipmentDelete(DeleteView):
@@ -221,11 +246,18 @@ class SpellList(GroupRequiredMixin, ListView):
     template_name = 'pages/list/spell-list.html'
 
     def get_queryset(self):
+        filter_txt = self.request.GET.get("name")
         if not has_group(self.request.user, adm_group):
-            self.object_list = Spell.objects.filter(user=self.request.user)
+            if filter_txt:
+                self.object_list = Spell.objects.filter(name__icontains=filter_txt, user=self.request.user)
+            else:
+                self.object_list = Spell.objects.filter(user=self.request.user)
+
             return self.object_list
         else:
-            return Warrior.objects.all()
+            if filter_txt:
+                return Spell.objects.filter(name__icontains=filter_txt)
+            return Spell.objects.all()
 
 
 class SpellDelete(DeleteView):
@@ -257,6 +289,12 @@ class EffectUpdate(GroupRequiredMixin, UpdateView):
 class EffectList(ListView):
     model = Effect
     template_name = 'pages/list/effect-list.html'
+
+    def get_queryset(self):
+        filter_txt = self.request.GET.get("name")
+        if filter_txt:
+            return Element.objects.filter(name__icontains=filter_txt)
+        return Element.objects.all()
 
 
 class EffectDelete(DeleteView):
