@@ -103,16 +103,27 @@
 <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
 
 <script type="application/javascript">
-    let divImage = document.getElementById('login-image');
-    let images = ["https://i.pinimg.com/originals/c2/9a/14/c29a141cb09fc2f0c95298681d7d964a.png",
-        "https://i.pinimg.com/originals/45/2d/2a/452d2a5c7ef51210d40050d8990c89a4.png",
-        "https://i.pinimg.com/originals/ce/20/d3/ce20d33fbe07711be9a279098301749d.png",
-        "https://i.pinimg.com/originals/18/da/95/18da9545333f8efa218a2f6ef82f72a6.png",
-    ];
-    {#"https://pbs.twimg.com/media/Bph0wF3CEAAL99i?format=png",#}
 
-    const random = Math.floor(Math.random() * images.length);
-    divImage.style.background = 'url(' + images[random] + ')';
+    let randomImage = function () {
+        let divImage = document.getElementById('login-image');
+        let images = ["https://i.pinimg.com/originals/c2/9a/14/c29a141cb09fc2f0c95298681d7d964a.png",
+            "https://i.pinimg.com/originals/45/2d/2a/452d2a5c7ef51210d40050d8990c89a4.png",
+            "https://i.pinimg.com/originals/ce/20/d3/ce20d33fbe07711be9a279098301749d.png",
+            "https://i.pinimg.com/originals/18/da/95/18da9545333f8efa218a2f6ef82f72a6.png",
+        ];
+        {#"https://pbs.twimg.com/media/Bph0wF3CEAAL99i?format=png",#}
+
+        const random = Math.floor(Math.random() * images.length);
+        divImage.style.background = 'url(' + images[random] + ')';
+    }
+
+    $(document).ready(function () {
+        randomImage();
+        window.setInterval(function () {
+            randomImage();
+        }, 5000);
+    });
+
 
 </script>
 
