@@ -75,15 +75,16 @@ class WarriorList(GroupRequiredMixin, ListView):
         filter_txt = self.request.GET.get("name")
         if not has_group(self.request.user, adm_group):
             if filter_txt:
-                self.object_list = Warrior.objects.filter(name__icontains=filter_txt, user=self.request.user)
+                self.object_list = Warrior.objects.filter(name__icontains=filter_txt,
+                                                          user=self.request.user).select_related('user')
             else:
-                self.object_list = Warrior.objects.filter(user=self.request.user)
+                self.object_list = Warrior.objects.filter(user=self.request.user).select_related('user')
 
             return self.object_list
         else:
             if filter_txt:
-                return Warrior.objects.filter(name__icontains=filter_txt)
-            return Warrior.objects.all()
+                return Warrior.objects.filter(name__icontains=filter_txt).select_related('user')
+            return Warrior.objects.all().select_related('user')
 
 
 class WarriorDelete(DeleteView):
